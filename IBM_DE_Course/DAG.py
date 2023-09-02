@@ -16,7 +16,7 @@ dag = DAG ('ETL_toll_data', description='Apache Airflow Final Assignment',
 default_args = default_args, schedule_interval = dt.timedelta(hours = 24) )
 
 task_1 = BashOperator ( task_id = 'unzip_data', 
-			bash_command = 'unzip /home/project/airflow/dags/tolldata.tgz',
+			bash_command = 'tar -xvzf /home/project/airflow/dags/tolldata.tgz',
 			dag = dag, )
 
 task_1
