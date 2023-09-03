@@ -32,5 +32,12 @@ task_4 = BashOperator( task_id = 'extract_data_from_fixed_width',
             dag = dag,)
 
 task_5 = BashOperator( task_id = 'consolidate_data',
-            bash_command= '',
+            bash_command= 'paste -d \',\' /home/project/airflow/dags/csv_data.csv /home/project/airflow/dags/tsv_data.csv /home/project/airflow/dags/fixed_width_data.csv > /home/project/airflow/dags/extracted_data.csv',
             dag= dag,)
+
+task_6 = BashOperator( task_id = 'transform_data',
+            bash_command= 'cat /home/project/airflow/dags/extracted_data.csv | tr [a-z] [A-Z] > /home/project/airflow/dags/transformed_data.csv  ',
+            dag= dag,)
+
+
+task_1 >> task_2 >> task_3 >> task_4 >> task_5
